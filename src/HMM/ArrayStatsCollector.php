@@ -3,6 +3,7 @@
 namespace Sastrawi\POSTagger\HMM;
 
 use Sastrawi\POSTagger\Pair;
+use Sastrawi\POSTagger\Util\NGram;
 
 class ArrayStatsCollector implements StatsCollectorInterface
 {
@@ -30,16 +31,7 @@ class ArrayStatsCollector implements StatsCollectorInterface
             }
         }
 
-        // convert to 2-grams
-        $grams = array();
-        for ($i = 0; $i < count($pairs) - 1; $i++) {
-            $gram = array($pairs[$i]);
-            for ($j = $i+1; $j < count($pairs) && $j < $i+2; $j++) {
-                $gram[] = $pairs[$j];
-            }
-
-            $grams[] = $gram;
-        }
+        $grams = NGram::arrayToGram($pairs, 2);
 
         foreach ($grams as $gram) {
             $key = '';
