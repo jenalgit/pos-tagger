@@ -7,5 +7,7 @@ class CorpusParserFactory
     public function createCorpusParser()
     {
         $corpusParser = new CorpusParser(new WhitespaceTokenizer(), new StringToPair());
+
+        return $corpusParser;
     }
 }
